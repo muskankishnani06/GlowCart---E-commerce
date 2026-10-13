@@ -75,12 +75,24 @@ let products = [
 
 let localCartItem = JSON.parse(localStorage.getItem("cart")) || [];
 
-function showProduct() {
+// ADDED: searchText parameter + filtering
+function showProduct(searchText = "") {
   const productList = document.getElementById("product-list");
 
   productList.innerHTML = "";
 
-  products.forEach((p) => {
+  // ADDED: keep only products whose name matches the search text
+  const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  // ADDED: message when nothing matches
+  if (filteredProducts.length === 0) {
+    productList.innerHTML = `<h5 class="text-center mt-5">No products found</h5>`;
+    return;
+  }
+
+  filteredProducts.forEach((p) => {
     productList.innerHTML += `<div class="col-md-4 mt-3">
         
         <div class="card product-card" >
@@ -99,6 +111,25 @@ function showProduct() {
 }
 
 showProduct();
+
+// search bar
+// CHANGED: selects your existing form/input, so no HTML changes are needed
+const searchForm = document.querySelector('form[role="search"]');
+const searchInput = document.querySelector(".search");
+
+// when Search button is clicked / Enter is pressed
+searchForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let searchText = searchInput.value.trim();
+
+  showProduct(searchText);
+});
+
+// ADDED: live search while typing
+searchInput.addEventListener("input", function () {
+  showProduct(searchInput.value.trim());
+});
 
 // add to cart
 
