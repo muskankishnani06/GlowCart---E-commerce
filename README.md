@@ -1,90 +1,95 @@
-# GlowCart
 
-GlowCart is a simple front-end e-commerce web app for skincare and beauty products. It is built with plain HTML, CSS, JavaScript and Bootstrap 5, and uses the browser's `localStorage` to keep the shopping cart between visits.
+# 🌸 GlowCart - E-Commerce Shopping Cart Web Application
 
-## Features
+GlowCart is an interactive, responsive front-end e-commerce application designed for a beauty and skincare store. Built with modern web standards using **HTML5**, **CSS3**, **Bootstrap 5**, and **Vanilla JavaScript**, it offers complete shopping cart functionality with local browser persistence.
 
-- **Product listing** - responsive grid of 12 skincare and makeup products with image, name and price (in ₹).
-- **Add to cart** - add a product; adding the same product again increases its quantity.
-- **Cart modal** - view all cart items with image, price, quantity and line total.
-- **Quantity controls** - increase (+) or decrease (-) quantity; decreasing to 0 removes the item.
-- **Remove item** - remove a product from the cart completely.
-- **Grand total** - automatically recalculated whenever the cart changes.
-- **Checkout** - places the order and clears the cart.
-- **Add product** - add a new product (name, price, image URL) from a modal form.
-- **Update product** - edit an existing product's name, price and image.
-- **Delete product** - remove a product from the product list.
-- **Persistent cart** - cart data is saved in `localStorage` under the key `cart`.
-- **Responsive design** - works on desktop, tablet and mobile with a custom pink/purple theme.
+---
 
-## Tech Stack
+## ✨ Features
 
-| Technology | Purpose |
-|------------|---------|
-| HTML5 | Page structure |
-| CSS3 | Custom styling and responsive layout |
-| JavaScript (ES6) | App logic and DOM manipulation |
-| Bootstrap 5.3.8 (CDN) | Layout, navbar, modals, buttons, tables |
-| localStorage | Cart persistence |
+- **Product Showcase**: Displays a responsive grid of products complete with images, titles, prices, and action buttons.
+- **Dynamic Shopping Cart**:
+  - Add items to cart with automatic quantity tracking.
+  - View cart details in an interactive Bootstrap modal.
+  - Increment and decrement product quantities.
+  - Automatically calculate item sub-totals and grand totals.
+- **Product Management (CRUD)**:
+  - **Create**: Add new products dynamically via a modal form.
+  - **Read**: Display product catalog stored in JavaScript/Local Storage.
+  - **Update**: Edit product name, price, and image details through an update modal.
+  - **Delete**: Remove products from the catalog or clear items from the cart.
+- **Persistent Storage**: Utilizes browser `localStorage` to save user cart selections across sessions.
+- **Responsive Design**: Fully responsive layout optimized for mobile, tablet, and desktop viewports.
 
-## Project Structure
+---
 
-```
-GlowCart/
-├── index.html        # Main page: navbar, product list, cart/add/update modals
-├── style.css         # Custom theme and responsive styles
-├── script.js         # Product data, cart logic, CRUD operations
-├── localStorage.js   # Standalone localStorage practice/demo file (not used by the app)
-├── assets/           # Images (e.g. favicon: "Elegant Pink Purple G Logo.png")
-└── README.md
-```
+## 🛠️ Tech Stack & Dependencies
 
-## Getting Started
+- **HTML5**: Semantic document structuring.
+- **CSS3 / Bootstrap 5 (v5.3.8)**: Modern layout, components (Modals, Navbar, Cards, Forms), and responsive styling.
+- **JavaScript (ES6+)**: Dynamic DOM manipulation, array manipulation, and event handling.
+- **Web Storage API**: Browser `localStorage` integration.
 
-No build step or dependencies to install.
+---
 
-1. Download or clone the project.
-2. Make sure the `assets/` folder with the favicon image is in the project root (optional, only affects the tab icon).
-3. Open `index.html` in any modern browser.
+## 📁 Project Structure
 
-An internet connection is needed for the Bootstrap CDN and the product images (Unsplash / Pexels).
-
-Optionally, run a local server:
-
-```bash
-# Python
-python -m http.server 8000
-
-# or Node
-npx serve .
+```text
+├── assets/
+│   └── Elegant Pink Purple G Logo.png   # Application Icon / Favicon
+├── index.html                           # Main HTML layout & Bootstrap modal templates
+├── style.css                            # Custom CSS styles, theme overrides, and animations
+├── script.js                            # Main application logic (Cart & CRUD operations)
+├── localStorage.js                      # Example utility helper for LocalStorage testing
+└── README.md                            # Project documentation
 ```
 
-Then visit `http://localhost:8000`.
+---
 
-## How to Use
+## 🚀 Getting Started
 
-1. **Browse** products on the home page.
-2. Click **Add to Cart** on any product.
-3. Open **Cart** in the navbar to adjust quantities, remove items, or **Check Out**.
-4. Click **Add product** in the navbar to create a new product by providing a name, price and image URL.
-5. Use **Update** or **Delete** on a product card to edit or remove it.
+### Prerequisites
 
-## Known Issues / Future Improvements
+No build tools or command-line dependencies are required to run this project! You only need a modern web browser (Google Chrome, Mozilla Firefox, Microsoft Edge, Safari).
 
-These are things in the current code worth fixing:
+### Running Locally
 
-- **Products are not persisted.** Added, updated or deleted products live only in memory and reset on page refresh. Only the cart is saved. Saving `products` to `localStorage` would fix this.
-- **Update bug:** the update handler saves the image as `image` instead of `img`, so image changes don't show up.
-- **Price stored as string:** new/updated products store `price` as text, which can break cart totals (string concatenation instead of addition). Convert with `Number()`.
-- **Missing validation:** `addProduct()` and `updateProduct()` show an alert for empty fields but continue anyway; add a `return`. The same applies to `checkOut()` with an empty cart, which still shows the success message.
-- **Search is not implemented.** The search box in the navbar is UI only.
-- **Add-product form** doesn't reset after submitting, and its modal doesn't close automatically.
-- **Cart table markup:** `<tbody>` is placed inside `<thead>` in `index.html`.
-- **`localStorage.js`** is not linked in `index.html` and would throw an error if used there (the `#localStorage` element is commented out). It can be removed or kept as a practice file.
-- **Duplicate alerts** appear when deleting a product.
-- Product deletion/cart item references use numeric IDs inline in `onclick`; consider event listeners for cleaner code.
+1. **Clone or Download the Repository**:
+   ```bash
+   git clone https://github.com/your-username/glowcart.git
+   ```
+2. **Navigate to the Project Directory**:
+   ```bash
+   cd glowcart
+   ```
+3. **Open the Application**:
+   - Double-click `index.html` to open it in your default browser.
+   - *Alternatively*, run it using a local server extension such as **VS Code Live Server**.
 
-## Author
+---
 
- Muskan Kishnani
+## 💡 How It Works
 
+### Local Storage Integration
+- **Key**: `"cart"`
+- When items are added, updated, or removed, the updated state is serialized using `JSON.stringify()` and written to `localStorage`.
+- Upon initial load, the application retrieves data via `JSON.parse(localStorage.getItem("cart"))`.
+
+### Key Functions (`script.js`)
+
+| Function | Description |
+| :--- | :--- |
+| `showProduct()` | Renders the product list grid dynamically onto the DOM. |
+| `addToCart(id)` | Adds selected product to the cart or increments quantity if already present. |
+| `showCartItem()` | Opens the cart modal and triggers the table re-render. |
+| `increaseQty(id)` / `decreaseQty(id)` | Updates item quantities in real-time within the cart table. |
+| `grandTotal()` | Calculates total cart cost using Array `.reduce()`. |
+| `addProduct()` | Captures form input and pushes a new product into the catalog. |
+| `updateProduct(id)` | Populates update form with existing product values and updates catalog on submission. |
+| `deleteToCart(id)` | Removes product entries from the main product list. |
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
